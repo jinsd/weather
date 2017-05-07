@@ -19,6 +19,6 @@ module.exports = function (location, callback) {
 		} else {
 			callback('It\'s ' + body.main.temp + ' in ' + body.name + '!');
 		}
-}	);
+	});
 
 }
