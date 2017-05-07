@@ -1,7 +1,15 @@
 var request = require('request');
-var url ='http://api.openweathermap.org/data/2.5/weather?q=San%20Diego&units=imperial&APPID=abed5b19c10b1cea491f0ee1b47fafd0';
 
-module.exports = function (callback) {
+
+module.exports = function (location, callback) {
+	
+	var encodedLocation = encodeURIComponent(location);
+	var url ='http://api.openweathermap.org/data/2.5/weather?q=' + encodedLocation + '&units=imperial&APPID=abed5b19c10b1cea491f0ee1b47fafd0';
+
+	if (!location) {
+		return callback('No location provided');
+	}
+
 	request({
 		url: url,
 		json: true
@@ -10,7 +18,7 @@ module.exports = function (callback) {
 			callback('Unable to fetch weather');
 		} else {
 			callback('It\'s ' + body.main.temp + ' in ' + body.name + '!');
-	}
-});
-	//callback('here is the current weather');
+		}
+}	);
+
 }
